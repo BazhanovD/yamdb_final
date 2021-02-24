@@ -1,4 +1,5 @@
-# REST API для проекта YaMDb ![YamDB](https://github.com/BazhanovD/yamdb_final/workflows/yamdb/badge.svg)
+# REST API для проекта YaMDb
+[![Actions Status](https://github.com/BazhanovD/yamdb_final/workflows/Yamdb_final/badge.svg)](https://github.com/BazhanovD/yamdb_final/actions)
 
 Проект YaMDb создан для хранения отзывов пользователей на различные произведения из категорий "Книги" и "Фильмы". Список категорий может быть расширен (можно, к примеру, добавить категорию "Музыка"). Произведению может быть присвоен жанр из списка предустановленных (например, "Сказка", "Хоррор" или "Боевик"). Пользователи выставляют произведению оценку по десятибалльной шкале. По их оценкам выставляется средний рейтинг произведения.
 
