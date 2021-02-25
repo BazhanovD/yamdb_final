@@ -3,6 +3,7 @@ volumes:
   postgres_data:
   static:
   media:
+  code:
 
 services:
   db:
@@ -22,6 +23,7 @@ services:
     volumes:
       - ./static:/static
       - ./media:/media
+      - .:/code
     env_file:
       - ./.env
   nginx:

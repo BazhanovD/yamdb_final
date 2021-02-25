@@ -57,8 +57,6 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           script: |
             sudo docker pull ${{ secrets.DOCKER_LOGIN }}/yamdb_final
-            sudo docker stop $(sudo docker ps -a -q)
-            sudo docker run --rm -d -p 8000:8000 ${{ secrets.DOCKER_LOGIN }}/yamdb_final
             
   send_message:
     runs-on: ubuntu-latest
