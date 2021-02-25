@@ -1,6 +1,7 @@
 version: '3.3'
 volumes:
   postgres_data:
+
 services:
   db:
     image: postgres:12.4
@@ -9,6 +10,7 @@ services:
     env_file:
       - ./.env
   web:
+    image: bazhanovd/yamdb_final
     build: .
     restart: always
     ports:
@@ -16,4 +18,13 @@ services:
     depends_on:
       - db
     env_file:
-      - ./.env 
+      - ./.env
+  nginx:
+    image: nginx:1.19.7
+    restart: always
+    depends_on:
+      - web
+    volumes:
+      - ./nginx_default/nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - 80:80
