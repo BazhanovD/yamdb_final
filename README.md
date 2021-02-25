@@ -6,7 +6,7 @@
 # Установка
 Клонируйте репозиторий.
 ```
-git clone https://github.com/BazhanovD/infra_sp2
+git clone https://github.com/BazhanovD/yamdb_final
 ```
 Переименуйте *env_template* в *.env*:
 ```
