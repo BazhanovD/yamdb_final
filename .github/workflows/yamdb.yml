@@ -57,7 +57,8 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           script: |
             sudo docker pull ${{ secrets.DOCKER_LOGIN }}/yamdb_final
-            sudo docker-compose up -d --force-recreate
+            sudo docker stop $(sudo docker ps -a -q)
+            sudo docker run --rm -d -p 5000:5000 ${{ secrets.DOCKER_LOGIN }}/yamdb_final
             
   send_message:
     runs-on: ubuntu-latest
