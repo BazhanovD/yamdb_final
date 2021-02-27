@@ -61,7 +61,6 @@ jobs:
             sudo apt install docker.io docker-compose -y
             sudo systemctl start docker
             sudo systemctl enable docker
-            run: echo ${{ secrets.DOCKER_PASS }} | docker login -u ${{ secrets.DOCKER_LOGIN }} --password-stdin
 
 
   deploy:
