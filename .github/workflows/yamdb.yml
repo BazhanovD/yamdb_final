@@ -77,17 +77,8 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USER }}
           key: ${{ secrets.SSH_KEY }}
-          source: "docker-compose.yaml,.env"
+          source: "docker-compose.yaml,.env, nginx_default"
           target: "~"
-
-      - name: copy nginx
-        uses: appleboy/scp-action@8a54b394594637844fcf9ec5cab3eb97ce5dedae
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USER }}
-          key: ${{ secrets.SSH_KEY }}
-          source: "nginx_default/nginx.conf"
-          target: "~/nginx_default"
 
       - name: executing remote ssh commands to deploy
         uses: appleboy/ssh-action@master
