@@ -62,7 +62,6 @@ jobs:
             sudo systemctl start docker
             sudo systemctl enable docker
             run: echo ${{ secrets.DOCKER_PASS }} | docker login -u ${{ secrets.DOCKER_LOGIN }} --password-stdin
-            mkdir nginx_default
 
 
   deploy:
