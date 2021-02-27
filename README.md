@@ -8,18 +8,6 @@
 ```
 git clone https://github.com/BazhanovD/yamdb_final
 ```
-Переименуйте *env_template* в *.env*:
-```
-mv env_template .env
-```
-Отредактируйте *.env*, внесите свой пароль:
-```
-POSTGRES_PASSWORD=your_password_here
-```
-Команда для запуска контейнеров:
-```
-docker-compose up -d
-```
 Команда для запуска терминала внутри контейнера:
 ```
 docker-compose exec web bash
@@ -39,5 +27,9 @@ python manage.py loaddata fixtures.json
 Команда для остановки контейнеров:
 ```
 docker-compose down
+```
+Команда для повторного запуска:
+```
+docker-compose up -d
 ```
 
