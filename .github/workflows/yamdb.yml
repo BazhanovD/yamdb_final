@@ -50,7 +50,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: executing remote ssh commands to deploy
-        uses: appleboy/ssh-action@master
+        uses: appleboy/ssh-action@63dd9dd662e35cedefd05fa36e163608893bf31d
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USER }}
@@ -81,7 +81,7 @@ jobs:
           target: "~"
 
       - name: executing remote ssh commands to deploy
-        uses: appleboy/ssh-action@master
+        uses: appleboy/ssh-action@63dd9dd662e35cedefd05fa36e163608893bf31d
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USER }}
@@ -97,7 +97,7 @@ jobs:
     needs: deploy
     steps:
       - name: send message
-        uses: appleboy/telegram-action@master
+        uses: appleboy/telegram-action@ed144893bace5d15db80deb9ad666ee9686ddac5
         with:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
