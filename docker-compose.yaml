@@ -20,8 +20,7 @@ services:
     depends_on:
       - db
     volumes:
-      - ./static:/static
-      - ./media:/media
+      - ./static:/code/static
     env_file:
       - ./.env
   nginx:
