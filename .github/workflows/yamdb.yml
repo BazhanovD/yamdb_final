@@ -79,7 +79,7 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USER }}
           key: ${{ secrets.SSH_KEY }}
-          source: "docker-compose.yaml,.env_template, nginx_default"
+          source: "docker-compose.yaml,env_template, nginx_default"
           target: "~"
 
       - name: executing remote ssh commands to deploy
