@@ -79,7 +79,7 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USER }}
           key: ${{ secrets.SSH_KEY }}
-          source: "docker-compose.yaml,env_template, nginx_default"
+          source: "docker-compose.yaml,.env, nginx_default"
           target: "~"
 
       - name: executing remote ssh commands to deploy
@@ -89,8 +89,6 @@ jobs:
           username: ${{ secrets.USER }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            rm .env
-            echo POSTGRES_PASSWORD=${{ secrets.DB_PASS }} >> .env
             sudo docker pull ${{ secrets.DOCKER_LOGIN }}/yamdb_final
             sudo docker-compose up -d
             sudo docker-compose exec -T web python manage.py collectstatic --no-input
