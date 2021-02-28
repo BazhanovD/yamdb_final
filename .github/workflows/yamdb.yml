@@ -20,6 +20,7 @@ jobs:
         pip install -r requirements.txt
         mv .env_template .env
         echo 'POSTGRES_PASSWORD=${{ secrets.DB_PASS }}' >> .env
+        cat .env
 
     - name: Lint with flake8
       run: flake8 .
