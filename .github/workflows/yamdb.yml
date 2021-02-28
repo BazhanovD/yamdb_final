@@ -18,8 +18,8 @@ jobs:
         python -m pip install --upgrade pip
         pip install flake8 pytest
         pip install -r requirements.txt
-        mv .env_template .env
-        echo POSTGRES_PASSWORD=${{ secrets.DB_PASS }} >> .env
+        mv .env_template1 .env
+        echo 'POSTGRES_PASSWORD=${{ secrets.DB_PASS }}' >> .env
 
     - name: Lint with flake8
       run: flake8 .
