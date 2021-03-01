@@ -91,6 +91,7 @@ jobs:
           username: ${{ secrets.USER }}
           key: ${{ secrets.SSH_KEY }}
           script: |
+            sudo rm .env
             sudo mv env_template .env
             sudo echo 'POSTGRES_PASSWORD=${{ secrets.DB_PASS }}' >> .env
             sudo docker pull ${{ secrets.DOCKER_LOGIN }}/yamdb_final
