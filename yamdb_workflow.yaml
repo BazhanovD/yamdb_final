@@ -15,6 +15,8 @@ jobs:
 
     - name: Install dependencies
       run: |
+        mv env_template .env
+        echo 'POSTGRES_PASSWORD=${{ secrets.DB_PASS }}' >> .env
         python -m pip install --upgrade pip
         pip install flake8 pytest
         pip install -r requirements.txt
@@ -48,9 +50,10 @@ jobs:
   prepare_for_deploy:
     needs: build_and_push_to_docker_hub
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
     steps:
       - name: executing remote ssh commands to deploy
-        uses: appleboy/ssh-action@master
+        uses: appleboy/ssh-action@63dd9dd662e35cedefd05fa36e163608893bf31d
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USER }}
@@ -68,6 +71,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: prepare_for_deploy
+    if: github.ref == 'refs/heads/master'
     steps:
       - name: Check out the repo
         uses: actions/checkout@v2
@@ -77,16 +81,18 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USER }}
           key: ${{ secrets.SSH_KEY }}
-          source: "docker-compose.yaml,.env, nginx_default"
+          source: "docker-compose.yaml,env_template, nginx_default"
           target: "~"
 
       - name: executing remote ssh commands to deploy
-        uses: appleboy/ssh-action@master
+        uses: appleboy/ssh-action@63dd9dd662e35cedefd05fa36e163608893bf31d
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USER }}
           key: ${{ secrets.SSH_KEY }}
           script: |
+            sudo mv env_template .env
+            sudo echo 'POSTGRES_PASSWORD=${{ secrets.DB_PASS }}' >> .env
             sudo docker pull ${{ secrets.DOCKER_LOGIN }}/yamdb_final
             sudo docker-compose up -d
             sudo docker-compose exec -T web python manage.py collectstatic --no-input
@@ -97,7 +103,7 @@ jobs:
     needs: deploy
     steps:
       - name: send message
-        uses: appleboy/telegram-action@master
+        uses: appleboy/telegram-action@ed144893bace5d15db80deb9ad666ee9686ddac5
         with:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
