@@ -50,6 +50,7 @@ jobs:
   prepare_for_deploy:
     needs: build_and_push_to_docker_hub
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
     steps:
       - name: executing remote ssh commands to deploy
         uses: appleboy/ssh-action@63dd9dd662e35cedefd05fa36e163608893bf31d
@@ -70,6 +71,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: prepare_for_deploy
+    if: github.ref == 'refs/heads/master'
     steps:
       - name: Check out the repo
         uses: actions/checkout@v2
