@@ -15,7 +15,7 @@ jobs:
 
     - name: Install dependencies
       run: |
-        echo 'POSTGRES_PASSWORD=your_password_here' >> .env
+        echo 'POSTGRES_PASSWORD=${{ secrets.DB_PASS }}' >> .env
         cat .env
         python -m pip install --upgrade pip
         pip install flake8 pytest
@@ -89,7 +89,7 @@ jobs:
           username: ${{ secrets.USER }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            sudo echo 'POSTGRES_PASSWORD=your_password_here' >> .env
+            sudo echo 'POSTGRES_PASSWORD=${{ secrets.DB_PASS }}' >> .env
             sudo docker pull ${{ secrets.DOCKER_LOGIN }}/yamdb_final
             sudo docker-compose up -d
             sudo docker-compose exec -T web python manage.py collectstatic --no-input
